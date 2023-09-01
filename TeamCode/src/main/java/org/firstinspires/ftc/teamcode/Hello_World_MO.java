@@ -13,8 +13,6 @@ public class Hello_World_MO extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        //SKJDvnjaefbnkjs
-
 
         FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
