@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @TeleOp()
-public class Variables_Elissa extends OpMode {
+public class Exercises_Elissa extends OpMode {
 
     @Override
     public void init() {
@@ -27,10 +25,14 @@ public class Variables_Elissa extends OpMode {
     @Override
     public void loop() {
         double speedForward = -gamepad1.left_stick_y / 2.0;
+        telemetry.addData("Y Stick Difference", gamepad1.left_stick_y - gamepad1.right_stick_y);
+        telemetry.addData("Left Trigger Sum", gamepad1.left_trigger + gamepad1.right_trigger);
         telemetry.addData("Left stick x", gamepad1.left_stick_x);
         telemetry.addData("Left stick y", gamepad1.left_stick_y);
+        telemetry.addData("Right stick x", gamepad1.right_stick_x);
+        telemetry.addData("Right stick y", gamepad1.right_stick_y);
         telemetry.addData("A button", gamepad1.a);
-        telemetry.addData("Left stick y", gamepad1.left_stick_y);
+        telemetry.addData("B button", gamepad1.b);
         telemetry.addData("speed Forward", speedForward);
         telemetry.update();
     }
