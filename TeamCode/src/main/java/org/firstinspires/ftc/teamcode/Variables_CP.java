@@ -10,25 +10,22 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @TeleOp()
 public class Variables_CP extends OpMode {
-
     @Override
     public void init() {
         FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
-
-        int teamNumber = 19824;
-        double motorSpeed = 0.5;
-        boolean touchSensorPressed = true;
-
-        
-
-        telemetry.addData("Team Number", teamNumber);
-        telemetry.addData("Motor Speed", motorSpeed);
-        telemetry.addData("Touch Sensor", touchSensorPressed);
     }
 
     @Override
     public void loop() {
 
+        int teamNumber = 19824;
+        double motorSpeed = gamepad1.left_stick_y;
+        boolean touchSensorPressed = gamepad1.a;
+
+        telemetry.addData("Team Number", teamNumber);
+        telemetry.addData("Motor Speed", motorSpeed);
+        telemetry.addData("A Button", touchSensorPressed);
+        telemetry.update();
     }
 }
