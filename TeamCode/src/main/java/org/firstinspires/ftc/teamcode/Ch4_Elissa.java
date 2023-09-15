@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp()
 public class Ch4_Elissa extends OpMode {
 
+    double forward_speed = gamepad1.left_stick_y;
+
     @Override
     public void init() {
         FtcDashboard dashboard = FtcDashboard.getInstance();
@@ -39,20 +41,21 @@ public class Ch4_Elissa extends OpMode {
         }
         if(!gamepad1.a) {
             telemetry.addData("A Button", "not pressed");
-            telemetry.addData("Left Stick y", gamepad1.left_stick_y * .5);
-            //turbo button
+            telemetry.addData("Left Stick y", gamepad1.left_stick_y);
+            //turbo button^
             telemetry.addData("Left Stick y", gamepad1.left_stick_y);
             telemetry.addData("Left Stick x", gamepad1.left_stick_x);
-            //non crazy mode
+            //non crazy mode^
 
         }
         else {
+            forward_speed = forward_speed * 2;
             telemetry.addData("A Button", "pressed");
-            telemetry.addData("Left Stick y", gamepad1.left_stick_y * 1);
-            //turbo button
+            telemetry.addData("Left Stick y", gamepad1.left_stick_y * 2);
+            //turbo button^
             telemetry.addData("Left Stick y", gamepad1.left_stick_x);
             telemetry.addData("Left Stick x", gamepad1.left_stick_y);
-            //crazy mode
+            //crazy mode^
         }
         telemetry.addData("Y Stick Difference", gamepad1.left_stick_y - gamepad1.right_stick_y);
         telemetry.addData("Left Trigger Sum", gamepad1.left_trigger + gamepad1.right_trigger);
