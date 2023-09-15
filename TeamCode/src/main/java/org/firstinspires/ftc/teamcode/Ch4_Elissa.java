@@ -40,13 +40,16 @@ public class Ch4_Elissa extends OpMode {
         if(!gamepad1.a) {
             telemetry.addData("A Button", "not pressed");
             telemetry.addData("Left Stick y", gamepad1.left_stick_y * .5);
+            //turbo button
             telemetry.addData("Left Stick y", gamepad1.left_stick_y);
             telemetry.addData("Left Stick x", gamepad1.left_stick_x);
             //non crazy mode
 
         }
         else {
+            telemetry.addData("A Button", "pressed");
             telemetry.addData("Left Stick y", gamepad1.left_stick_y * 1);
+            //turbo button
             telemetry.addData("Left Stick y", gamepad1.left_stick_x);
             telemetry.addData("Left Stick x", gamepad1.left_stick_y);
             //crazy mode
