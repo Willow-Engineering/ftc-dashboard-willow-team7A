@@ -26,9 +26,12 @@ public class Telemetry_CP extends OpMode {
         telemetry.addData("Forward Speed", forwardSpeed);
         // crazy mode
         if(gamepad1.a) {
-            telemetry.addData("Right Stick", gamepad1.right_stick_x);}
+            telemetry.addData("Right Stick Y", gamepad1.right_stick_x);
+            telemetry.addData("Right Stick X", gamepad1.right_stick_y);}
         else {
-            telemetry.addData("Right Stick", gamepad1.right_stick_y);}
+            telemetry.addData("Right Stick X", gamepad1.right_stick_x);
+            telemetry.addData("Right Stick Y", gamepad1.right_stick_y);}
+      //the rest of the telemetry from Ch 3
         telemetry.addData("B Button", gamepad1.b);
         telemetry.addData("Stick Difference", gamepad1.right_stick_y-gamepad1.left_stick_y);
         telemetry.addData("Trigger Sum",gamepad1.left_trigger+gamepad1.right_trigger);
