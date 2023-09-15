@@ -27,6 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -45,15 +46,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * information. The telemetry {@link Telemetry#log() log} is illustrated by scrolling a poem
  * to the driver station.
  *
- * @see Telemetry
- */
+ * @see Telemetry */
+
 @TeleOp(name = "CIM_testing2_MO")
 //@Disabled
 public class CIM_testing2_MO extends LinearOpMode  {
-    /** keeps track of the line of the poem which is to be emitted next */
+    // keeps track of the line of the poem which is to be emitted next
     int poemLine = 0;
 
-    /** keeps track of how long it's been since we last emitted a line of poetry */
+    //keeps track of how long it's been since we last emitted a line of poetry
     ElapsedTime poemElapsed = new ElapsedTime();
 
     static final String[] poem = new String[] {
@@ -83,8 +84,7 @@ public class CIM_testing2_MO extends LinearOpMode  {
 
     @Override public void runOpMode() {
 
-        /* we keep track of how long it's been since the OpMode was started, just
-         * to have some interesting data to show */
+        // we keep track of how long it's been since the OpMode was started, just to have some interesting data to show
         ElapsedTime opmodeRunTime = new ElapsedTime();
 
         // We show the log in oldest-to-newest order, as that's better for poetry
@@ -97,8 +97,8 @@ public class CIM_testing2_MO extends LinearOpMode  {
         /**
          * Wait until we've been given the ok to go. For something to do, we emit the
          * elapsed time as we sit here and wait. If we didn't want to do anything while
-         * we waited, we would just call {@link #waitForStart()}.
-         */
+         * we waited, we would just call {@link #waitForStart()}. */
+
         while (!isStarted()) {
             telemetry.addData("time", "%.1f seconds", opmodeRunTime.seconds());
             telemetry.update();
@@ -114,8 +114,8 @@ public class CIM_testing2_MO extends LinearOpMode  {
          * driver station (recall that telemetry transmission is throttled to reduce bandwidth use.
          * Note that getBatteryVoltage() below returns 'Infinity' if there's no voltage sensor attached.
          *
-         * @see Telemetry#getMsTransmissionInterval()
-         */
+         * @see Telemetry#getMsTransmissionInterval() */
+
         telemetry.addData("voltage", "%.1f volts", new Func<Double>() {
             @Override public Double value() {
                 return getBatteryVoltage();
@@ -148,11 +148,11 @@ public class CIM_testing2_MO extends LinearOpMode  {
 
             /**
              * Transmit the telemetry to the driver station, subject to throttling.
-             * @see Telemetry#getMsTransmissionInterval()
-             */
+             * @see Telemetry#getMsTransmissionInterval() */
+
             telemetry.update();
 
-            /** Update loop info and play nice with the rest of the {@link Thread}s in the system */
+            // Update loop info and play nice with the rest of the {@link Thread}s in the system
             loopCount++;
         }
     }
