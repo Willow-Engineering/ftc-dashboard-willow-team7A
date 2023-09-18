@@ -9,8 +9,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 public class Gamepad_testing extends LinearOpMode {
 
-    double yPos;
+    double left_joystick_y;
     boolean button_pressed;
+    double forward_speed;
+
 
     @Override
     public void runOpMode() {
@@ -22,12 +24,17 @@ public class Gamepad_testing extends LinearOpMode {
 
         while (opModeIsActive()) {
             
-            yPos = gamepad1.left_stick_y;
+            left_joystick_y = gamepad1.left_stick_y;
             button_pressed = gamepad1.a;
 
-            telemetry.addData("Y stick: ", yPos);
+            //TURBO MODE!!!!!!!!!!!!!!
+            if(button_pressed) {
+                forward_speed = forward_speed * 2;
+            }
+
+
+            telemetry.addData("X stick: ", left_joystick_y);
             telemetry.addData("A button: ", button_pressed);
-            //logGamepad(telemetry, gamepad1, "gamepad1");
             telemetry.update();
 
         }
