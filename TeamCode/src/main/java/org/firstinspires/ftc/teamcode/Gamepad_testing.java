@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="Gamepad_testing")
 
@@ -12,6 +13,7 @@ public class Gamepad_testing extends LinearOpMode {
     double left_joystick_y;
     boolean button_pressed;
     double forward_speed;
+    private DcMotor motor1;
 
 
     @Override
@@ -30,6 +32,12 @@ public class Gamepad_testing extends LinearOpMode {
             //TURBO MODE!!!!!!!!!!!!!!
             if(button_pressed) {
                 forward_speed = forward_speed * 2;
+            }
+
+           //if the driver presses B, then run motor1
+            if (gamepad1.b) {
+              motor1.setPower(1);
+
             }
 
 
