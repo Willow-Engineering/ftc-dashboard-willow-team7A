@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -52,12 +53,14 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="Lana_Intake_Test")
 //@Disabled
+@Config
 public class Lana_Intake_Test extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor intakeMotor = null;
    // private DcMotor rightDrive = null;
+    public static double intakeSpeed = 0.5;
 
     @Override
     public void runOpMode() {
@@ -103,7 +106,7 @@ public class Lana_Intake_Test extends LinearOpMode {
             // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            intakeMotor.setPower(gamepad1.left_stick_y);
+            intakeMotor.setPower(intakeSpeed);
             //rightDrive.setPower(rightPower);
 
             // Show the elapsed game time and wheel power.
