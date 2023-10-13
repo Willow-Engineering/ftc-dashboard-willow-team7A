@@ -76,6 +76,8 @@ public class basic_bot_v2 extends LinearOpMode {
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
+        arm_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
