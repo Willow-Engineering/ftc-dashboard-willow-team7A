@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -59,6 +60,8 @@ public class basic_bot_v2 extends LinearOpMode {
     private DcMotor leftDrive = null;
     private DcMotor rightDrive = null;
 
+    private DcMotorEx arm = null;
+
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -69,6 +72,7 @@ public class basic_bot_v2 extends LinearOpMode {
         // step (using the FTC Robot Controller app on the phone).
         leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        arm = hardwareMap.get(DcMotorEx.class, "arm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -76,11 +80,12 @@ public class basic_bot_v2 extends LinearOpMode {
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        arm_motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
+        arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -108,9 +113,27 @@ public class basic_bot_v2 extends LinearOpMode {
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
 
+            if(gamepad1.a) {
+
+                // Set the motor's target position to 300 ticks
+                arm.setTargetPosition(300);
+
+                // Switch to RUN_TO_POSITION mode
+                arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+
+                // Start the motor moving by setting the max velocity to 200 ticks per second
+                arm.setVelocity(200);
+            }
+
+
+
+
+
+
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            telemetry.addData("Encoder value", arm.getCurrentPosition());
             telemetry.update();
         }
     }
