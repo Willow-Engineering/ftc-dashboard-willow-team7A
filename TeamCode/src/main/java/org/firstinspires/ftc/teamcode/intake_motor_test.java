@@ -82,9 +82,22 @@ public class intake_motor_test extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            if(gamepad1.a) {
+
+                lift.setTargetPosition(300);
+                lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                lift.setVelocity(300);
+
+            }
+
+
+
+
 
 
             // Show the elapsed game time and wheel power.
