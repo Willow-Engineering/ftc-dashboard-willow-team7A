@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -52,6 +53,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="basic_bot_v2")
+@Config
 //@Disabled
 public class basic_bot_v2 extends LinearOpMode {
 
@@ -61,6 +63,10 @@ public class basic_bot_v2 extends LinearOpMode {
     private DcMotor rightDrive = null;
 
     private DcMotorEx arm = null;
+
+    public static int left_claw_open = 50;
+
+
 
     @Override
     public void runOpMode() {
@@ -123,6 +129,11 @@ public class basic_bot_v2 extends LinearOpMode {
 
                 // Start the motor moving by setting the max velocity to 200 ticks per second
                 arm.setVelocity(200);
+            }
+
+            if (gamepad1.b){
+
+                myServo.setPosition(left_claw_open);
             }
 
 
