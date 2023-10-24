@@ -76,15 +76,15 @@ public class basic_bot_v2 extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+//        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
+//        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         arm = hardwareMap.get(DcMotorEx.class, "arm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+//        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+//        rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -116,24 +116,28 @@ public class basic_bot_v2 extends LinearOpMode {
 //             rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            leftDrive.setPower(leftPower);
-            rightDrive.setPower(rightPower);
+//            leftDrive.setPower(leftPower);
+//            rightDrive.setPower(rightPower);
 
-            if(gamepad1.a) {
-
-                // Set the motor's target position to 300 ticks
-                arm.setTargetPosition(300);
-
-                // Switch to RUN_TO_POSITION mode
-                arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-
-                // Start the motor moving by setting the max velocity to 200 ticks per second
-                arm.setVelocity(200);
-            }
+//            if(gamepad1.a) {
+//
+//                // Set the motor's target position to 300 ticks
+//                arm.setTargetPosition(300);
+//
+//                // Switch to RUN_TO_POSITION mode
+//                arm.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+//
+//                // Start the motor moving by setting the max velocity to 200 ticks per second
+//                arm.setVelocity(200);
+//            }
 
             if (gamepad1.b){
 
-                myServo.setPosition(left_claw_open);
+                arm.setPower(1);
+            }
+
+            else {
+                arm.setPower(0);
             }
 
 
@@ -144,7 +148,7 @@ public class basic_bot_v2 extends LinearOpMode {
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            telemetry.addData("Encoder value", arm.getCurrentPosition());
+            //telemetry.addData("Encoder value", arm.getCurrentPosition());
             telemetry.update();
         }
     }
