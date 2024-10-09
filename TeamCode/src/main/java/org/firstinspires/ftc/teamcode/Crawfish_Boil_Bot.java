@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="CrawfishBoilBot")
@@ -13,15 +14,19 @@ public class Crawfish_Boil_Bot extends LinearOpMode {
     private DcMotor leftFront = null;
     private DcMotor rightFront = null;
     private DcMotorEx armMotor = null;
+    private Servo claw = null;
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        leftFront  = hardwareMap.get(DcMotor.class, "leftFront");
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         armMotor = hardwareMap.get(DcMotorEx.class, "arm");
+        claw = hardwareMap.get(Servo.class, "claw");
+
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
@@ -34,23 +39,36 @@ public class Crawfish_Boil_Bot extends LinearOpMode {
             double leftPower;
             double rightPower;
 
-            double drive = gamepad1.left_stick_y;
-            double turn  = gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.right_stick_x;
+            leftPower = Range.clip(drive + turn, -1.0, 1.0);
+            rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
             leftFront.setPower(leftPower);
             rightFront.setPower(rightPower);
 
-            if(gamepad1.a) {
-                armMotor.setTargetPosition(300); // Go to this position
+            if (gamepad1.y) {
+                armMotor.setTargetPosition(-275); // Go to this position
                 armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
                 armMotor.setVelocity(200); // At this speed
             }
+            if (gamepad1.a) {
+                armMotor.setTargetPosition(-30); // Go to this position
+                armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                armMotor.setVelocity(200); // At this speed
+            }
+            if(gamepad1.b) {
+                claw.setPosition(0);
+            }
+            if(gamepad1.x) {
+                claw.setPosition(1);
+            }
+
+
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Arm Position", armMotor.getCurrentPosition());
+            telemetry.addData("Claw Position", claw.getPosition());
             telemetry.update();
         }
     }
 }
-
